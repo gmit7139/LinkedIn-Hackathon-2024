@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Learning Mockup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+
+        video {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="Home.png" alt="Home" id="slide" onclick="nextSlide()">
+        <video id="video" controls autoplay onclick="nextSlide()">
+            <source src="OpenVideo.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        const slides = [
+            "Home.png",
+            "OpenVideoYellowMarker.png",
+            "OpenVideo.mp4",  // This will be handled differently
+            "OpenVideoQuestions.png",
+            "OpenVideoAnswers.png",
+            "OpenVideoExplanations.png",
+            "Home.png",
+            "MyLibrary.png",
+            "MyLibraryExpanded.png",
+            "MyLeaderboard.png",
+            "AboutTeam.png"
+        ];
+
+        let currentSlide = 0;
+
+        function nextSlide() {
+            const img = document.getElementById('slide');
+            const video = document.getElementById('video');
+
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            if (slides[currentSlide].endsWith('.mp4')) {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.play();
+            } else {
+                img.src = slides[currentSlide];
+                img.style.display = 'block';
+                video.style.display = 'none';
+            }
+        }
+
+        // Event listener to move to the next slide after the video ends
+        document.getElementById('video').addEventListener('ended', nextSlide);
+    </script>
+</body>
+
+</html>
